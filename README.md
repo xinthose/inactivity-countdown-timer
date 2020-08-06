@@ -37,6 +37,39 @@ IL.cleanup()
 
 run `npm start` to view the demo locally
 
+### Example TypeScript Service
+
+```
+import { IInactivityConfig, InactivityCountdownTimer } from 'inactivity-countdown-timer';
+
+@Injectable({
+    providedIn: "root",
+})
+export class InactivityService {
+    private inactivityTimer: any;
+
+    constructor() {
+        const settings: IInactivityConfig = {
+            idleTimeoutTime: 15000, // milliseconds
+            windowResetEvents: ["mousemove", "keypress"],
+            timeoutCallback: () => {
+                console.warn("inactivity limit reached");
+            },
+        }
+        
+        this.inactivityTimer = new InactivityCountdownTimer(settings);
+    }
+
+    public startTimer() {
+        this.inactivityTimer.start();
+    }
+
+    public stopTimer() {
+        this.inactivityTimer.stop();
+    }
+}
+```
+
 ## Features 
 
  - A count down callback - **alert users you are going to transition them**. 
