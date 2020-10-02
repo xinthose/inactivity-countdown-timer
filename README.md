@@ -29,6 +29,7 @@ const settings = {
 const IL = new InactivityLogout(settings);
 
 // make sure you cleanup the object when you are finished using it.
+// `new` should be called on every login and `cleanup` on every logout, else `windowResetEvents` will not work
 // will not be garbage collected unless you clean it up because of the timers
 IL.cleanup()
 ```
